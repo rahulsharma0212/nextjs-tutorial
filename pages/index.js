@@ -1,9 +1,11 @@
-import styles from "../styles/Home.module.css";
-
-export default function Home() {
+function HomePage() {
   return (
-    <div className={styles.container}>
-      <h1>Hello Next World!</h1>
-    </div>
+    <ul>
+      <li>Product 1</li>
+      <li>Product 2</li>
+      <li>Product 3</li>
+    </ul>
   );
 }
+
+export default HomePage;
