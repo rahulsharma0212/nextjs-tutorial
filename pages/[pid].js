@@ -29,6 +29,11 @@ export async function getStaticProps(context) {
 
   const product = data.products.find((el) => el.id === productId);
 
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
   return {
     props: {
       loadedProduct: product,
@@ -45,7 +50,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths: chngData,
-    fallback: false, // true,false,"blocking"
+    fallback: true, // true,false,"blocking"
   };
   /* return {
     paths: [
