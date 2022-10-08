@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-function LastSalesPage() {
-  const [sales, setSales] = useState();
+function LastSalesPage(props) {
+  const [sales, setSales] = useState(props.sales);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsLoading(true);
@@ -29,6 +29,22 @@ function LastSalesPage() {
       ))}
     </ul>
   );
+}
+
+export async function getStaticProps() {
+  const res = await fetch(
+    "https://nextjs-course-9fe94-default-rtdb.firebaseio.com/sales.json"
+  );
+  const data = await res.json();
+  const transformedSales = [];
+  for (const key in data) {
+    transformedSales.push({ id: key, ...data[key] });
+  }
+  return {
+    props: {
+      sales: transformedSales,
+    },
+  };
 }
 
 export default LastSalesPage;
