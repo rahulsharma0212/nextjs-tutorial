@@ -5,6 +5,9 @@ function HomePage(props) {
   return (
     <div>
       <Head>
+        <title>this title is overide by upcoming title</title>
+      </Head>
+      <Head>
         <title>NextIS Events </title>
         <meta
           name="description"
