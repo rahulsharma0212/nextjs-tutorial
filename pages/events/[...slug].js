@@ -28,15 +28,34 @@ function FilteredEventsPage(props) {
     }
   }, [data]);
 
+  let pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content={`A list of filtered Events`} />
+    </Head>
+  );
   if (!loadedEvents) {
-    return <p className="center">Loading..</p>;
+    return (
+      <>
+        {pageHeadData}
+        <p className="center">Loading..</p>
+      </>
+    );
   }
-
   const filteredYear = filterData[0];
   const filteredMonth = filterData[1];
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${numMonth}/${numYear}.`}
+      />
+    </Head>
+  );
 
   if (
     isNaN(numMonth) ||
@@ -70,6 +89,7 @@ function FilteredEventsPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for choosen filter!</p>
         </ErrorAlert>
@@ -82,13 +102,7 @@ function FilteredEventsPage(props) {
   const date = new Date(filteredYear, filteredMonth - 1);
   return (
     <>
-      <Head>
-        <title>Filtered Events</title>
-        <meta
-          name="description"
-          content={`All events for ${numMonth}/${numYear}.`}
-        />
-      </Head>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>
