@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 // import { getFilteredEvents } from "../../helper/api-util";
 import useSWR from "swr";
+import Head from "next/head";
 import EventList from "../../components/events/EventList";
 import ResultsTitle from "../../components/events/ResultsTitle";
 import Button from "../../components/ui/Button";
@@ -81,6 +82,13 @@ function FilteredEventsPage(props) {
   const date = new Date(filteredYear, filteredMonth - 1);
   return (
     <>
+      <Head>
+        <title>Filtered Events</title>
+        <meta
+          name="description"
+          content={`All events for ${numMonth}/${numYear}.`}
+        />
+      </Head>
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>
